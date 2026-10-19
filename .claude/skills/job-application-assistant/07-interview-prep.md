@@ -1,5 +1,5 @@
 ---
-framework_version: 1.0.0
+framework_version: 1.1.0
 ---
 
 # Interview Preparation Guide
@@ -80,6 +80,14 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 - "What's the balance between development/new projects and maintenance work?"
 - "How would you describe the leadership style in this team?"
 - "What do people who thrive here have in common?"
+
+## Mercado chileno: etapas de selección (ver `10-mercado-chile.md`, sección 8)
+
+- **Evaluación psicolaboral:** muy frecuente en Chile. Puede incluir tests psicométricos y proyectivos, cuestionarios de personalidad y una entrevista en profundidad con psicólogo laboral. Preparación: responder con coherencia y honestidad (los instrumentos detectan inconsistencias), dormir bien, llevar lentes si se usan, y tener claros los motivos de cada cambio laboral, fortalezas y áreas de mejora con ejemplos. No "estudiar" respuestas ideales de tests.
+- **Entrevista por competencias:** preguntas conductuales del tipo "cuénteme de una situación en que...". Mapear cada competencia del aviso (trabajo en equipo, orientación a resultados, liderazgo, seguridad, servicio al cliente, etc.) a un ejemplo STAR de este archivo.
+- **Pruebas técnicas:** casos, ejercicios prácticos o desafíos de código; preguntar formato y duración con anticipación.
+- **Preguntas frecuentes en Chile:** pretensión de renta (responder líquido o bruto, en CLP mensual, con rango; ver sección 2), disponibilidad (inmediata o plazo de aviso), disposición a turnos o a trabajar en regiones, y motivo de salida del trabajo actual.
+- **Referencias laborales:** preparar 2-3 jefaturas anteriores y avisarles antes de entregar sus datos.
 
 ## Phone/Video Interview Tips
 - Have STAR examples written out (use this file)

@@ -1,5 +1,5 @@
 ---
-framework_version: 1.0.2
+framework_version: 1.1.0
 ---
 
 # Cover Letter Templates and Tailoring Guide
@@ -159,6 +159,13 @@ Escape these wherever they appear in body text:
 - Same template structure, just write content in the posting's language
 - Adjust date format to local convention
 - Adjust closing to local convention (e.g. "Med venlig hilsen," for Danish)
+
+### Mercado chileno: registro en español (ver `10-mercado-chile.md`, sección 10)
+- Saludo: "Estimado/a [Nombre Apellido]:" si se conoce a la persona; si no, "Estimado equipo de selección:". Evitar "A quien corresponda".
+- Tono profesional, directo y concreto; sin lenguaje florido ni fórmulas vacías ("soy proactivo y responsable") sin evidencia. Español neutro, sin modismos chilenos.
+- Cierre: "Saludos cordiales," o "Atentamente,". Fecha en formato local: "Santiago, [día] de [mes] de [año]".
+- Preparar también una versión corta (aprox. 80-120 palabras) para los campos de "mensaje al reclutador" de los portales.
+- No mencionar la pretensión de renta en la carta salvo que la oferta lo pida expresamente; en ese caso indicar si es líquida o bruta.
 
 ## Checklist Before Finalizing
 - [ ] No em-dashes (use commas or periods instead)

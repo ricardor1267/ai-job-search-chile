@@ -2,6 +2,23 @@
 
 Step-by-step instructions for getting the AI Job Search framework running.
 
+## Notas para Chile
+
+Esta copia es **ai-job-search-chile**, una adaptación al mercado chileno de [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) (MIT). Los pasos de esta guía son los mismos del original; estas notas resumen lo que cambia en Chile.
+
+- **Portales.** `/scrape` usa los CLI chilenos `chiletrabajos-search`, `computrabajo-search`, `trabajando-search` y `getonbrd-search` (empleos de tecnología), más los originales `linkedin-search` (con `-l "Santiago, Chile"`) y `freehire-search`. Los portales daneses (`jobindex`, `jobnet`, `jobbank`, `jobdanmark`) siguen en el repositorio pero con `enabled: false` en su `SKILL.md`, para que las actualizaciones del upstream se puedan fusionar sin conflictos. Úsalos a bajo volumen y solo para uso personal, respetando el `robots.txt` y los términos de cada portal (el `robots.txt` de Computrabajo no permite parámetros de filtro en la URL, por eso su CLI filtra las fechas en tu equipo).
+- **Idioma.** El CV y la carta de presentación se redactan en **español por defecto**; si el aviso está en inglés, `/apply` puede generarlos en inglés. La guía del mercado chileno (formato de CV, pretensiones de renta líquida vs. bruta, tipos de contrato, Ley Karin, etc.) está en `.claude/skills/job-application-assistant/10-mercado-chile.md`.
+- **LaTeX en español.** Los documentos en español usan `\usepackage[spanish]{babel}` (separación silábica y fechas en español). Con una instalación completa (TeX Live, MacTeX, MiKTeX completo) ya viene incluido. En instalaciones mínimas agrega los paquetes:
+  - TinyTeX/BasicTeX: `tlmgr install babel-spanish hyphen-spanish`
+  - MiKTeX básico: `mpm --install=babel-spanish --install=hyphen-spanish` (o deja activa la instalación automática, ver más abajo)
+  - Debian/Ubuntu sin `texlive-full`: `sudo apt install texlive-lang-spanish`
+- **Bun** (necesario para los CLI de portales):
+  - Linux y macOS: `curl -fsSL https://bun.sh/install | bash` (en macOS también `brew install oven-sh/bun/bun`)
+  - Windows (PowerShell): `powershell -ExecutionPolicy Bypass -c "irm https://bun.sh/install.ps1 | iex"` o `winget install Oven-sh.Bun`
+  - Cierra y vuelve a abrir la terminal, y verifica con `bun --version`.
+- **Sueldos.** Para comparar remuneraciones con tus propios datos, ver la sección "Uso en Chile" de `tools/README_SALARY_TOOL.md`. Anota siempre si una cifra es **líquida o bruta** y en CLP mensuales.
+- **Privacidad.** Un fork público expone todo lo que `/setup` escribe. Para tu búsqueda personal usa un **repositorio privado** con este repo como `upstream`: ver la [sección 8](#8-pulling-upstream-updates-into-your-fork).
+
 ## 1. Prerequisites
 
 ### Claude Code
@@ -270,6 +287,8 @@ Find a job posting you're interested in, then:
 /apply https://jobindex.dk/job/1234567
 ```
 
+(En Chile, usa la URL de un aviso de Chiletrabajos, Computrabajo, Trabajando.com, Get on Board o LinkedIn.)
+
 Or paste the job description directly:
 
 ```
@@ -304,6 +323,8 @@ These commands apply to the stock templates (moderncv CV, `cover.cls` cover lett
 ## 8. Pulling upstream updates into your fork
 
 Upstream keeps improving the methodology files your fork has personalized, so plan for updates from day one:
+
+> **Chile:** si usas **ai-job-search-chile** para tu búsqueda personal, tu `upstream` es este fork chileno (la URL del repositorio desde el que clonaste), no el original danés: así recibes tanto las mejoras del original como las adaptaciones chilenas. Los comandos de abajo con `MadsLorentzen/ai-job-search` aplican igual si reemplazas esa URL. Quien mantiene el fork chileno sí usa `MadsLorentzen/ai-job-search` como `upstream`.
 
 **Prefer releases over raw `master`.** Tagged [releases](../../releases) are vetted checkpoints, each described in [CHANGELOG.md](CHANGELOG.md). Updating to a tag pulls a stable, documented state instead of whatever `master` happens to be mid-review. Fetch tags with `git fetch upstream --tags` and merge a release (for example `git merge v1.0.0`) when you want stability; pull `master` directly only when you specifically want the latest unreleased changes. The steps below apply either way - substitute the release tag for `upstream/master` where you see it.
 

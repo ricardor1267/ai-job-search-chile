@@ -3,6 +3,8 @@
 <!-- SETUP: This file is populated by running /setup -->
 <!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
 
+> **Fork chileno.** Esta es la versión para el mercado laboral de Chile. Claude debe responder siempre al usuario en **español neutro** (sin modismos chilenos) y aplicar `.claude/skills/job-application-assistant/10-mercado-chile.md` al evaluar ofertas, redactar CV y cartas, completar formularios y preparar entrevistas. Los montos de renta se expresan en **CLP, líquido mensual**, salvo que la oferta indique otra base (bruto o UF).
+
 ## Role
 This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
@@ -18,6 +20,7 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 ### Identity
 - **Name:** [YOUR_NAME]
 - **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
+  <!-- Chile: usar comuna y región, ej. "[TU_COMUNA], [TU_REGIÓN], Chile (máx. 60 min puerta a puerta en Metro/Red)". No incluir dirección completa ni RUT. -->
 - **Languages:**
   | Language | Level |
   |----------|-------|
@@ -27,7 +30,8 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
   undeclared language is a hard deal-breaker if a posting requires it; a declared language at a
   lower level than a posting wants is flagged for your own judgment, not auto-rejected. See
   04-job-evaluation.md's Language Gate. -->
-- **CV language:** [YOUR_CV_LANGUAGE] <!-- English unless your market expects otherwise; /setup asks -->
+- **CV language:** [YOUR_CV_LANGUAGE] <!-- English unless your market expects otherwise; /setup asks. Fork chileno: Spanish por defecto -->
+- **Pretensión de renta:** [YOUR_SALARY_EXPECTATION] <!-- Fork chileno: CLP, líquido mensual, idealmente un rango (ej. "$X - $Y líquidos"). Ver 10-mercado-chile.md, sección 2 -->
 
 - **Status:** [YOUR_EMPLOYMENT_STATUS]
 - **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
@@ -127,7 +131,8 @@ After creating or updating a CV or cover letter, re-read the generated file and 
 - [ ] No LaTeX syntax errors (balanced braces, correct commands)
 - [ ] No spelling or grammar errors
 - [ ] Agentic coding / AI tooling references mention **Claude Code** by name
-- [ ] Cover letter is addressed to the correct person (or "Dear Hiring Manager" if unknown)
+- [ ] Cover letter is addressed to the correct person (or "Dear Hiring Manager" if unknown; in Spanish, "Estimado equipo de selección:")
+- [ ] Chilean market (`10-mercado-chile.md`): no RUT, age, marital status or full address on the CV; location as comuna + región; any salary figure states líquido or bruto in CLP
 - [ ] Cover letter fits approximately one page
 - [ ] CV section headings (`\section{...}`) and the References boilerplate line match the CV's language, not left as the English template defaults (see `05-cv-templates.md`)
 

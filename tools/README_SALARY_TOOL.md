@@ -121,4 +121,73 @@ python3 salary_lookup.py --validate      # pre-flight check your salary_data.jso
 - The data file (`salary_data.json`) is **excluded from git** (see `.gitignore`). Your salary data may be proprietary or confidential.
 - If the data file is missing, `salary_lookup.py` exits with a helpful error message and the `/apply` workflow skips the salary benchmark step.
 - The fuzzy matcher handles Danish company name variations: legal suffixes, Nordic characters, anglicized spellings, and partial matches.
+- It also handles Chilean names: trailing legal forms (S.A., S.A.C., SpA, S.p.A., Ltda., Limitada, EIRL, "y Cía."), a standalone "Chile" (but not "Banco de Chile"), and Spanish accents/ñ for ASCII-typed queries. See "Uso en Chile" below.
 - `--validate` checks your data file for malformed category values and duplicate company names and prints a report, without performing a lookup.
+
+## Uso en Chile
+
+Esta sección explica cómo armar `salary_data.json` para el mercado chileno. La herramienta **no descarga datos de ninguna fuente**: tú recopilas las cifras, las anotas y el archivo queda solo en tu máquina (está en `.gitignore`).
+
+### Fuentes que puedes usar
+
+Recopila tú mismo las cifras desde fuentes a las que tengas acceso legítimo, y respeta los términos de uso de cada sitio:
+
+- **Avisos con sueldo publicado** en portales como Chiletrabajos, Computrabajo, Trabajando.com o Get on Board (este último suele publicar rangos en avisos de tecnología). Anota empresa, cargo, ciudad, rango y fecha del aviso.
+- **Informes o estudios de remuneraciones** que publican portales de empleo (por ejemplo, los informes de renta de Trabajando.com) y consultoras de selección o de compensaciones. Muchos son gratuitos a cambio de un registro; otros son pagados.
+- **Glassdoor Chile** u otros sitios de sueldos reportados por empleados. Son datos autodeclarados y con muestras pequeñas: úsalos como referencia, no como verdad.
+- **Mi Futuro / Futuro Laboral (Mineduc)**: ingresos promedio por carrera e institución en los primeros años de egreso. Sirve para estimar el rango de una profesión, no el de una empresa en particular.
+- Tu propia red: ofertas que hayas recibido, conversaciones con colegas, sueldos de tu sindicato o colegio profesional si los publica.
+
+No se incluyen enlaces ni cifras de referencia a propósito: cambian seguido y no queremos fijar valores que podrían estar desactualizados.
+
+### Reglas para que los datos sean comparables
+
+- **Registra siempre si la cifra es líquida o bruta.** En Chile los avisos mezclan ambas. El sueldo líquido es lo que recibes después de descontar AFP, salud (Fonasa/Isapre), seguro de cesantía e impuesto; el bruto es antes de esos descuentos. Nunca mezcles ambos en la misma categoría.
+- **Usa pesos chilenos (CLP) mensuales.** Si una fuente da cifras anuales, en UF o en USD, conviértelas y anota en `metadata.baseline_description` cómo y con qué fecha lo hiciste.
+- Anota la **fecha** y la **fuente** de cada dato (en `metadata.source` o en el nombre de la categoría) para saber cuándo actualizarlo.
+- Indica si el monto incluye bonos, gratificación legal o asignaciones (colación, movilización), que en Chile pueden pesar bastante en el total.
+
+### Ejemplo
+
+Con `index_baseline` en `0` la herramienta muestra los montos sin compararlos contra una línea base:
+
+```json
+{
+  "metadata": {
+    "source": "Avisos y estudios recopilados a mano, 2026",
+    "index_baseline": 0,
+    "index_label": "CLP/mes",
+    "baseline_description": "Sueldo mensual en CLP. liquido_* = liquido, bruto_* = bruto. Sin bonos."
+  },
+  "companies": [
+    {
+      "company": "Empresa Ejemplo SpA",
+      "city": "Santiago",
+      "categories": {
+        "liquido_analista": { "index": 1200000 },
+        "bruto_analista": { "index": 1500000 }
+      }
+    },
+    {
+      "company": "Compañía Minera Ejemplo S.A.",
+      "city": "Antofagasta",
+      "categories": {
+        "bruto_ingeniero_senior": { "count": 3, "index": 4000000 }
+      }
+    }
+  ]
+}
+```
+
+Las cifras del ejemplo son ilustrativas, no datos reales de mercado.
+
+### Búsquedas
+
+```bash
+python3 salary_lookup.py "Empresa Ejemplo"                       # encuentra "Empresa Ejemplo SpA"
+python3 salary_lookup.py "Compania Minera" --city "Antofagasta"  # sin tildes también funciona
+python3 salary_lookup.py "Empresa Ejemplo" --city "Santiago" --json
+python3 salary_lookup.py --validate
+```
+
+El buscador ignora los sufijos legales al final del nombre (S.A., SA, S.A.C., SpA, S.p.A., Ltda., Limitada, EIRL, E.I.R.L., "y Cía.") y la palabra "Chile" cuando va suelta ("Walmart Chile" se busca como "Walmart"), pero la conserva cuando es parte del nombre ("Banco de Chile", "Universidad de Chile"). Las tildes y la ñ se pliegan, así que puedes escribir sin acentos.

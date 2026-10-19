@@ -3,12 +3,15 @@ name: job-application-assistant
 description: >
   Assists with job applications: evaluating job postings, tailoring CVs, writing cover letters,
   and preparing for interviews. Triggers on keywords like: job posting, job application, CV,
-  cover letter, resume, interview prep, job fit, career, application, apply, ansøgning, stilling
+  cover letter, resume, interview prep, job fit, career, application, apply, ansøgning, stilling,
+  postulación, oferta laboral, carta de presentación, entrevista, pretensión de renta
 allowed-tools: Read, Glob, Grep, WebFetch, WebSearch, Bash, Edit, Write, AskUserQuestion
-framework_version: 1.3.4
+framework_version: 1.4.0
 ---
 
 # Job Application Assistant
+
+> **Mercado chileno (fork Chile):** read `10-mercado-chile.md` alongside the other reference files and apply it in every step below: evaluation (Step 1), CV (Step 2), cover letter (Step 3), application forms and interview prep (Step 4). User-facing output (chat replies, CV, cover letter, form text, interview prep) defaults to **neutral Spanish** unless the profile's `CV language` / Languages table or the posting says otherwise.
 
 ---
 
@@ -21,7 +24,7 @@ When the user provides a job posting (URL or text), follow this workflow:
 - Keep the **full posting text verbatim** for Step 3b to archive - never a summary
 - Analyze the posting for required competencies, keywords, and priorities
 - Research the company (website, LinkedIn, mission, recent news), per `09-web-research.md`
-- Score the posting against the candidate's profile using the framework in `04-job-evaluation.md`
+- Score the posting against the candidate's profile using the framework in `04-job-evaluation.md`, applying the Chilean-market checks in `10-mercado-chile.md` (comuna/commute, renta líquida vs bruta, tipo de contrato, jornada/turnos, licencias y certificaciones)
 - Present the evaluation table and verdict
 - Suggest whether the candidate should call the employer before applying (see `04-job-evaluation.md` for guidance)
 - Ask the user if they want to proceed with an application
@@ -29,13 +32,13 @@ When the user provides a job posting (URL or text), follow this workflow:
 ### Step 2: Tailor CV
 - Before writing either document, derive `<company>_<role>` once by the **Subfolder naming** rule in `documents/README.md`; reuse that exact value for the CV, cover letter, and Step 3b archive path. If the rule says to stop because the derived name is empty, stop before creating any file.
 - Read the most relevant existing CV variant from `cv/` as a starting point
-- Follow the guidelines in `05-cv-templates.md`
+- Follow the guidelines in `05-cv-templates.md` and the Chilean CV norms in `10-mercado-chile.md` (section 1)
 - Create `cv/main_<company>_<role>.tex` with tailored content
 - Adjust: profile statement, skills section, experience bullet emphasis, section order
 
 ### Step 3: Write Cover Letter
 - Follow the writing style rules in `03-writing-style.md` (critical: no em-dashes, no cliches)
-- Follow the template structure in `06-cover-letter-templates.md`
+- Follow the template structure in `06-cover-letter-templates.md` and the Spanish register in `10-mercado-chile.md` (section 10)
 - Create `cover_letters/cover_<company>_<role>.tex`
 - Ensure the letter connects specific experience to the role requirements
 
@@ -45,7 +48,7 @@ When the user provides a job posting (URL or text), follow this workflow:
 - This step exists here because `/scrape` Step 5 routes straight into this skill. Without it, that path writes two documents and records nothing.
 
 ### Step 4: Interview Preparation
-- Follow the framework in `07-interview-prep.md`
+- Follow the framework in `07-interview-prep.md` and the Chilean selection steps in `10-mercado-chile.md` (section 8: evaluación psicolaboral, entrevista por competencias)
 - Prepare STAR-format answers for likely questions
 - Identify role-specific talking points
 - Draft questions the candidate should ask the interviewer
@@ -65,6 +68,7 @@ When the user provides a job posting (URL or text), follow this workflow:
 | `07-interview-prep.md` | STAR examples, tough questions, roleplay guidelines |
 | `08-application-forms.md` | Portal free-text fields: self-introduction, project entries, character-limited pitches |
 | `09-web-research.md` | Fetching postings and company pages: trust boundary, the WebFetch 403 fallback, escalation order, claim verification |
+| `10-mercado-chile.md` | Chilean market layer: CV norms, pretensión de renta (líquido vs bruto), contratos, jornada y turnos, previsión, Ley 21.015, commute por comuna, etapas de selección, portales, registro en español. Apply in evaluation, CV, cover letter, forms and interview steps |
 
 ---
 

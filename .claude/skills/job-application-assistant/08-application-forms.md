@@ -1,5 +1,5 @@
 ---
-framework_version: 1.0.0
+framework_version: 1.1.0
 ---
 
 # Application Form Fields
@@ -65,6 +65,17 @@ These reward **a specific situation over an adjective**. Most applicants submit 
 4. Present all candidates with counts, recommend one, and say why.
 
 Prefer the version that **maps the candidate's problem onto the employer's problem**, where a truthful mapping exists. That is what "stand out" is actually asking for.
+
+## Mercado chileno: campos frecuentes en portales (ver `10-mercado-chile.md`)
+
+Portales como Chiletrabajos, Computrabajo, Trabajando.com, Laborum, Get on Board, Bolsa Nacional de Empleo y Empleos Públicos, además de los ATS corporativos, suelen pedir:
+
+- **Pretensión de renta:** siempre en CLP mensual, indicando **líquido o bruto** (sección 2). Si el campo es numérico obligatorio y no aclara la base, usar el monto del perfil, advertir al usuario de la ambigüedad y dejar la aclaración en un campo de texto libre si existe. Nunca inventar una cifra: si el perfil no tiene pretensión registrada, preguntar.
+- **Disponibilidad:** "inmediata" o con plazo concreto (por ejemplo, el aviso al empleador actual), según lo declarado en el perfil. Incluye, cuando se pregunta, disponibilidad para turnos, viajes o trabajo en regiones (sección 11).
+- **Datos personales sensibles:** si el formulario exige RUT, fecha de nacimiento u otros datos personales, el usuario los ingresa directamente; el asistente no los guarda en archivos del repositorio.
+- **Mensaje al reclutador / presentación:** versión corta de la carta (aprox. 80-120 palabras), en español neutro y con el registro de la sección 10.
+- **Empleos Públicos:** respetar el formato de las bases del concurso y adjuntar exactamente la documentación solicitada; los requisitos son excluyentes y los plazos estrictos.
+- **Nivel educacional y licencias:** usar las categorías del portal (por ejemplo, "Técnico nivel superior", "Universitaria completa") y la clase de licencia de conducir exacta.
 
 ## Output format
 

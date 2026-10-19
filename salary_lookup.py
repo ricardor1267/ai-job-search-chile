@@ -12,9 +12,16 @@ instructions on the expected format and how to convert from Excel.
 
 Usage:
     python salary_lookup.py "Company Name"
-    python salary_lookup.py "Company Name" --city "København"
+    python salary_lookup.py "Company Name" --city "Santiago"
+    python salary_lookup.py "Codelco" --city "Antofagasta"
     python salary_lookup.py "Company Name" --json
     python salary_lookup.py --list-all
+
+Chile: Chilean legal-form suffixes (S.A., S.A.C., SpA, S.p.A., Ltda.,
+Limitada, EIRL, "y Cía.") and a standalone "Chile" are ignored when
+matching, and accents/ñ fold for ASCII-typed queries, so
+"Compania Minera" finds "Compañía Minera Ejemplo S.A.". The Danish
+behavior (A/S, ApS, ø/æ/å) is unchanged.
 """
 
 import json
@@ -33,6 +40,18 @@ SPELLING_VARIANTS = {
     "ö": "o", "ä": "ae", "ü": "u",
 }
 
+# Chilean legal-form suffixes: S.A., S.A.C., SpA, S.p.A., Ltda., Limitada,
+# EIRL / E.I.R.L., "y Cía." - anchored to the end of the (casefolded) name.
+CHILE_LEGAL_SUFFIXES = (
+    r"(?:\s+(?:"
+    r"s\.?\s?a\.?(?:\s?c\.?)?"          # s.a. / sa / s.a.c. / sac
+    r"|s\.?\s?p\.?\s?a\.?"               # spa / s.p.a.
+    r"|ltda\.?|limitada"
+    r"|e\.?\s?i\.?\s?r\.?\s?l\.?"        # eirl / e.i.r.l.
+    r"|(?:(?:y|&)\s*)?c[ií]a\.?"         # y cía. / & cia
+    r"))+\s*$"
+)
+
 # Legal suffixes and noise to strip when matching company names
 STRIP_PATTERNS = [
     r"\ba/s\b", r"\baps\b", r"\bi/s\b", r"\bp/s\b", r"\bk/s\b",
@@ -41,6 +60,14 @@ STRIP_PATTERNS = [
     r"\bdanmark\b", r"\bdenmark\b", r"\bscandinavia\b", r"\bnordic\b",
     r"\bgroup\b", r"\bholding\b",
     r",\s*.*$",  # everything after comma (sub-entities)
+    # --- Chile (additive; runs after the comma rule so "X S.A., Sucursal"
+    # first loses ", Sucursal" and then "S.A."). Legal-form suffixes are only
+    # stripped at the END of the name, one or more in a row, so words such
+    # as "Spa" or "Sa" inside a name are left alone.
+    CHILE_LEGAL_SUFFIXES,
+    # A standalone "Chile" is noise ("Walmart Chile" -> "Walmart"), but not
+    # when it is part of the name: "Banco de Chile", "Universidad de Chile".
+    r"(?<!\bde )(?<!\bdel )\bchile\b",
 ]
 
 
@@ -463,7 +490,7 @@ def main():
         if args.city:
             print(f"  (filtered by city: {args.city})")
         print("\nTry a shorter or different name. Company names in the dataset")
-        print("may include legal suffixes like 'A/S' or 'ApS'.")
+        print("may include legal suffixes like 'A/S', 'ApS', 'S.A.', 'SpA' or 'Ltda.'.")
         sys.exit(1)
 
     if args.json:

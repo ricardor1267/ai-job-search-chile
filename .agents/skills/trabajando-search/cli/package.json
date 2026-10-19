@@ -1,0 +1,20 @@
+{
+  "name": "trabajando-cli",
+  "version": "1.0.0",
+  "description": "CLI para buscar ofertas de empleo en Trabajando.com (Chile) vía la API JSON pública de su buscador — sin autenticación, sin dependencias de ejecución. Uso personal.",
+  "type": "module",
+  "main": "src/cli.ts",
+  "bin": {
+    "trabajando-search": "src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "test": "bun test --timeout 30000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/bun": "1.3.14"
+  }
+}

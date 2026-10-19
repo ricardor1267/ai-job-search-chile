@@ -1,5 +1,5 @@
 ---
-framework_version: 1.4.7
+framework_version: 1.5.0
 ---
 
 # CV Templates and Tailoring Guide
@@ -124,6 +124,14 @@ Two related patterns are fine and should be kept:
 ### Section headings must match the CV's language (important)
 
 Section headings such as `\section{Core Competencies}`, `Professional Experience`, `Education`, `Languages`, `Publications`, `Honors and Awards`, `References` (and any others your template defines), plus the `Available upon request.` line under References, are all **literal English text baked into the template** - they do not translate themselves. Whenever the CV language (see `CV language` in the candidate profile) is not English, translate every one of these too, whatever they are, not just the body prose - a CV with a fully localized profile statement and bullets sitting under untouched English section headers reads as sloppy and inconsistent, and it's an easy thing to forget precisely because the prose translation is the obvious, visible part of the job. Worked example for Spanish: `Competencias Clave`, `Experiencia Profesional`, `Educaci\'on`, `Idiomas`, `Publicaciones`, `Distinciones y Premios`, `Referencias`, `Disponibles a solicitud.` The same rule applies for any other target language - check this explicitly during the verification pass.
+
+### Mercado chileno (ver `10-mercado-chile.md`, sección 1)
+
+- **Idioma del CV:** español por defecto en el fork chileno, salvo que `CV language` en `CLAUDE.md` indique otro idioma. Traducir todos los encabezados del template (regla anterior); en Chile se prefiere `Experiencia laboral`, `Formación académica`, `Cursos y certificaciones`, `Idiomas`, `Referencias` / `Disponibles a solicitud.`
+- **Datos personales:** nombre, teléfono, correo, LinkedIn y ubicación como **comuna y región**. **No** incluir RUT, edad o fecha de nacimiento, estado civil ni dirección completa: no son necesarios y exponen al candidato. Foto opcional (común en Chile, nunca obligatoria).
+- **Extensión y orden:** 1 a 2 páginas, cronológico inverso. El límite de 2 páginas de este template se mantiene; para perfiles junior u operativos puede bastar una página si el usuario lo pide.
+- **Licencia de conducir:** si es relevante para el cargo, indicar la clase (ej. "Licencia de conducir Clase B").
+- **Cursos y certificaciones:** incluir cursos OTEC/SENCE y certificaciones habilitantes con institución, horas y año; si la oferta los exige, darles visibilidad en la primera página.
 
 ## Section-by-Section Tailoring
 

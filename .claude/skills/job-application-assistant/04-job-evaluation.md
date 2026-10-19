@@ -1,5 +1,5 @@
 ---
-framework_version: 1.2.6
+framework_version: 1.3.0
 ---
 
 # Job Evaluation Framework
@@ -95,6 +95,17 @@ Does the role and company culture match the behavioral profile?
 - Remote with occasional office: PASS
 - Requires relocation: FAIL (deal-breaker)
 - Frequent international travel: FLAG (discuss with user)
+
+#### Mercado chileno (ver `10-mercado-chile.md`)
+
+Para ofertas en Chile, completar esta dimensión y las notas de la evaluación con:
+
+- **Traslado por comuna:** comparar la comuna del lugar de trabajo con la del usuario y estimar el tiempo puerta a puerta (Metro/Red o auto). Considerar modalidad presencial, híbrida o remota y si hay bus de acercamiento. Si excede las restricciones del perfil: FAIL o FLAG según lo declarado (sección 7).
+- **Renta:** registrar si el monto publicado es **líquido o bruto** (CLP mensual, o UF si la oferta la usa) y normalizar antes de comparar con la pretensión del perfil. Si la oferta no lo aclara, anotarlo como pregunta para el reclutador (sección 2).
+- **Tipo de contrato:** indefinido, plazo fijo, por obra o faena, u honorarios. Si el perfil excluye alguno (por ejemplo, honorarios), es **FAIL** (sección 3).
+- **Jornada y turnos:** horas semanales y sistema (5x2, 4x3, 6x1, rotativos, horario mall, faena). Una jornada por sobre el máximo legal vigente es FLAG *(verificar vigencia, Ley 21.561)*; un turno incompatible con las restricciones del perfil es FAIL (sección 4).
+- **Requisitos habilitantes como filtro duro:** licencia de conducir de una clase específica, certificaciones obligatorias (por ejemplo, trabajo en altura, operación de equipos, registro profesional) o título exigido por ley. Si la oferta los marca como excluyentes y el perfil no los tiene: **FAIL — hard stop**, citando el requisito textual. Si son deseables: tratarlos como brecha en la puntuación, no como FAIL (sección 1).
+- **Empleos Públicos:** los requisitos de las bases del concurso son excluyentes; leer las bases completas antes de puntuar (sección 9).
 
 ### 5. Career Alignment & Motivation (0-100)
 Does this role advance career goals and contain tasks that energize?

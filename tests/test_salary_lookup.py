@@ -604,6 +604,77 @@ class TestSearchCompanyScoreThreshold(unittest.TestCase):
         self.assertEqual(results[0]["company"], "Novo Nordisk")
 
 
+# ---------------------------------------------------------------------------
+# Chile: legal-form suffixes and Spanish accents (fork adaptation, additive)
+# ---------------------------------------------------------------------------
+
+class TestChileanSuffixStripping(unittest.TestCase):
+    def test_sa_variants_strip_to_the_same_name(self):
+        for name in ("Cencosud S.A.", "Cencosud SA", "Cencosud S. A.",
+                     "Cencosud S.A.C.", "Cencosud"):
+            with self.subTest(name=name):
+                self.assertEqual(normalize(name), "cencosud")
+
+    def test_spa_ltda_and_eirl_variants_strip(self):
+        cases = {
+            "Empresa Ejemplo SpA": "empresaejemplo",
+            "Empresa Ejemplo S.p.A.": "empresaejemplo",
+            "Inversiones Ejemplo Ltda.": "inversionesejemplo",
+            "Inversiones Ejemplo Limitada": "inversionesejemplo",
+            "Servicios Ejemplo E.I.R.L.": "serviciosejemplo",
+            "Servicios Ejemplo EIRL": "serviciosejemplo",
+            "Pérez y Cía. Ltda.": "pérez",
+        }
+        for name, expected in cases.items():
+            with self.subTest(name=name):
+                self.assertEqual(normalize(name), expected)
+
+    def test_suffix_inside_a_name_is_kept(self):
+        # Only trailing legal forms are stripped; "Spa" in a hotel name and
+        # "Sa" as a leading word are meaningful.
+        self.assertEqual(normalize("Termas Spa Resort"), "termassparesort")
+        self.assertEqual(extract_core_words("Sa Corp"), ["sa", "corp"])
+
+    def test_standalone_chile_is_noise(self):
+        self.assertEqual(normalize("Walmart Chile S.A."), "walmart")
+        self.assertEqual(match_score("Falabella", "Falabella Chile SpA"), 100)
+
+    def test_chile_as_part_of_the_name_is_kept(self):
+        self.assertEqual(normalize("Banco de Chile"), "bancodechile")
+        self.assertEqual(normalize("Universidad de Chile"), "universidaddechile")
+        self.assertLess(match_score("Banco de Chile", "Banco Santander Chile"), 80)
+
+    def test_sub_entity_after_comma_and_suffix_both_strip(self):
+        self.assertEqual(normalize("Ejemplo S.A., Agencia en Chile"), "ejemplo")
+
+    def test_danish_suffixes_still_strip(self):
+        self.assertEqual(normalize("Novo Nordisk A/S"), "novonordisk")
+        self.assertEqual(normalize("Simple Corp ApS"), "simplecorp")
+
+
+class TestChileanAccentMatching(unittest.TestCase):
+    def test_ascii_query_finds_spanish_accented_company(self):
+        self.assertEqual(
+            match_score("Compania Minera Ejemplo", "Compañía Minera Ejemplo S.A."), 85
+        )
+        self.assertEqual(match_score("Construcciones Perez", "Construcciones Pérez Ltda."), 85)
+
+    def test_anglicize_folds_spanish_accents_and_enye(self):
+        self.assertEqual(anglicize("compañía logística"), "compania logistica")
+        self.assertEqual(anglicize("pingüino"), "pinguino")
+
+    def test_accented_query_matches_exactly(self):
+        self.assertEqual(match_score("Compañía Minera Ejemplo", "Compañía Minera Ejemplo SpA"), 100)
+
+    def test_city_filter_folds_accents(self):
+        data = _make_data(
+            _entry("Ejemplo Ingeniería S.A.", "Concepción"),
+            _entry("Ejemplo Ingeniería S.A.", "Santiago"),
+        )
+        results = search_company(data, "Ejemplo Ingenieria", city="Concepcion")
+        self.assertEqual([r["city"] for r in results], ["Concepción"])
+
+
 class TestSalaryFileEncoding(unittest.TestCase):
     """Exercise user-created UTF-8 files through the documented CLI."""
 

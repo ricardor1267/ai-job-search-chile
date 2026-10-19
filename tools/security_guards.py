@@ -47,6 +47,11 @@ ALLOWED_PERMISSIONS = {
     "Bash(bun run .agents/skills/jobbank-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/jobdanmark-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/jobindex-search/cli/src/cli.ts:*)",
+    # Chilean fork portal CLIs (one entry each, matching their SKILL.md allowed-tools).
+    "Bash(bun run .agents/skills/chiletrabajos-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/computrabajo-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/trabajando-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/getonbrd-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/jobnet-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/linkedin-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/freehire-search/cli/src/cli.ts:*)",
