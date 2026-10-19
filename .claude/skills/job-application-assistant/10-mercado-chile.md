@@ -1,5 +1,5 @@
 ---
-framework_version: 1.0.0
+framework_version: 1.0.1
 ---
 
 # Mercado laboral chileno: convenciones y criterios
@@ -19,7 +19,7 @@ Reglas generales:
 
 | Aspecto | Convención |
 |---|---|
-| Extensión | 1 a 2 páginas. Una página para perfiles junior u operativos; dos para perfiles con trayectoria. El formato moderncv de dos páginas de este framework es aceptable. |
+| Extensión | 1 a 2 páginas en el mercado chileno. **Este framework genera siempre 2 páginas** (regla dura de `/apply` y `05-cv-templates.md`), lo que es adecuado para perfiles con trayectoria. `cv/main_example.tex` cabe en 1 página porque ilustra el estilo, no el largo. Para perfiles junior con poco material, no rellenar: ampliar logros reales, cursos y habilidades, o registrar una plantilla de 1 página con `/add-template`. |
 | Orden | Cronológico inverso (lo más reciente primero) en experiencia y formación. |
 | Idioma | Español por defecto. CV en inglés solo si la oferta está en inglés, la empresa es multinacional con proceso en inglés, o el perfil lo indica. |
 | Foto | Opcional. Es común en Chile, pero no es requisito. Si se incluye: fondo neutro, tipo carnet o profesional. Si el usuario no la quiere, no insistir. |

@@ -1,5 +1,5 @@
 ---
-framework_version: 1.1.0
+framework_version: 1.1.1
 ---
 
 # Cover Letter Templates and Tailoring Guide
@@ -161,6 +161,7 @@ Escape these wherever they appear in body text:
 - Adjust closing to local convention (e.g. "Med venlig hilsen," for Danish)
 
 ### Mercado chileno: registro en español (ver `10-mercado-chile.md`, sección 10)
+- **Español en LaTeX (xelatex):** `cover.cls` ya carga fontspec, así que la carta usa `\usepackage{polyglossia}` + `\setdefaultlanguage{spanish}` (como en `cover_letters/cover_example.tex`). Así `\currentdate{Santiago, \today}` produce "Santiago, 19 de octubre de 2026". El esqueleto en inglés de esta guía sirve sólo de estructura: saludo, cierre y pie se escriben en español.
 - Saludo: "Estimado/a [Nombre Apellido]:" si se conoce a la persona; si no, "Estimado equipo de selección:". Evitar "A quien corresponda".
 - Tono profesional, directo y concreto; sin lenguaje florido ni fórmulas vacías ("soy proactivo y responsable") sin evidencia. Español neutro, sin modismos chilenos.
 - Cierre: "Saludos cordiales," o "Atentamente,". Fecha en formato local: "Santiago, [día] de [mes] de [año]".

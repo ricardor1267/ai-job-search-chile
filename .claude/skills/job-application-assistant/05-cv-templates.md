@@ -1,5 +1,5 @@
 ---
-framework_version: 1.5.0
+framework_version: 1.5.1
 ---
 
 # CV Templates and Tailoring Guide
@@ -127,6 +127,7 @@ Section headings such as `\section{Core Competencies}`, `Professional Experience
 
 ### Mercado chileno (ver `10-mercado-chile.md`, sección 1)
 
+- **Español en LaTeX (lualatex):** copiar del preámbulo de `cv/main_example.tex` las líneas `\usepackage{babel}` y `\babelprovide[import, main]{spanish}` (cargan el locale desde `babel-es.ini` de babel base, sin depender de `texlive-lang-spanish` ni de los atajos de `spanish.ldf`). Sin ellas, guiones, fechas y separación silábica quedan en inglés.
 - **Idioma del CV:** español por defecto en el fork chileno, salvo que `CV language` en `CLAUDE.md` indique otro idioma. Traducir todos los encabezados del template (regla anterior); en Chile se prefiere `Experiencia laboral`, `Formación académica`, `Cursos y certificaciones`, `Idiomas`, `Referencias` / `Disponibles a solicitud.`
 - **Datos personales:** nombre, teléfono, correo, LinkedIn y ubicación como **comuna y región**. **No** incluir RUT, edad o fecha de nacimiento, estado civil ni dirección completa: no son necesarios y exponen al candidato. Foto opcional (común en Chile, nunca obligatoria).
 - **Extensión y orden:** 1 a 2 páginas, cronológico inverso. El límite de 2 páginas de este template se mantiene; para perfiles junior u operativos puede bastar una página si el usuario lo pide.

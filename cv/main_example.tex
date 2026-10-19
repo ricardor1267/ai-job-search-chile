@@ -1,10 +1,20 @@
-%% Example CV - [YOUR_NAME]
-%% Comprehensive overview of all competencies, experience, and achievements.
-%% Use as a master reference when tailoring role-specific CVs.
+%% CV de ejemplo - [YOUR_NAME]
+%% SETUP: ejecute /setup para reemplazar este ejemplo con su información real.
+%% El contenido de ejemplo (empleadores, instituciones y logros) es FICTICIO e
+%% ilustrativo; el encabezado usa marcadores que /setup completa.
+%% Cualquier parecido con personas o empresas reales es coincidencia.
 %%
-%% SETUP: Run /setup to populate this with your actual information.
-%% Compile with: lualatex main_example.tex
-%% (pdflatex often fails on modern MiKTeX with fontawesome5 font-expansion errors.)
+%% Convenciones del mercado chileno que ilustra este ejemplo:
+%% - 1 página (máximo 2), orden cronológico inverso.
+%% - Ubicación solo como comuna y región. NO incluir RUT, edad o fecha de
+%%   nacimiento, estado civil ni dirección completa.
+%% - Rangos de fechas con guion ASCII ("2022 - Actualidad"), no con "--":
+%%   el guion largo que genera LaTeX confunde a los parsers de los ATS.
+%% - Miles con punto (1.200) y porcentajes escapados (\%).
+%%
+%% SETUP: ejecuta /setup para reemplazar estos datos por tu información real.
+%% Compilar con: lualatex main_example.tex
+%% (pdflatex suele fallar en MiKTeX moderno con errores de fontawesome5.)
 
 \documentclass[11pt,a4paper,sans]{moderncv}
 \moderncvstyle{banking}
@@ -30,6 +40,13 @@
 % right. moderncv 2.5 loads T1 itself under pdflatex; 2.3.1 (Debian/Ubuntu apt)
 % does not. \ifpdftex comes from iftex, which every moderncv version loads.
 \ifpdftex\usepackage[T1]{fontenc}\fi
+% Idioma español. \babelprovide carga el locale desde babel-es.ini, que viene
+% con babel base (no exige el paquete texlive-lang-spanish) y no activa los
+% atajos de spanish.ldf ("<", ">", "~", "."), que chocan con moderncv. Da
+% \today en español ("19 de octubre de 2026") y separación silábica en
+% español cuando los patrones están instalados.
+\usepackage{babel}
+\babelprovide[import, main]{spanish}
 % moderncv loads hyperref itself in an \AtEndPreamble hook, so \hypersetup
 % must go in an \AtEndPreamble of our own: on moderncv < 2.4 a top-level
 % \usepackage{hyperref} clashes with the class's own
@@ -49,142 +66,118 @@
 \usepackage[scale=0.80]{geometry}
 \usepackage{import}
 
-% personal data
+% Datos personales: /setup reemplaza estos marcadores con tus datos reales.
+% Los marcadores [First]/[Last] y [your.email@example.com] son los centinelas que
+% usa el CI para detectar datos personales publicados por error: no los cambies
+% en la plantilla pública. En Chile basta comuna y región; nunca RUT ni dirección.
 \name{[First]}{[Last]}
-% If you have no address to list, DELETE this whole line. \address{}{}{} fails
-% with "There's no line here to end" on every moderncv version.
-\address{[Your Address, City, Country]}{}{}
-\phone[mobile]{[+XX XXXXXXXXXX]}
+% Si no quieres indicar ubicación, BORRA esta línea completa. \address{}{}{}
+% falla con "There's no line here to end" en todas las versiones de moderncv.
+\address{[Comuna, Región]}{}{}
+\phone[mobile]{[+56 9 XXXX XXXX]}
 \email{[your.email@example.com]}
-\extrainfo{\href{[https://linkedin.com/in/your-profile]}{LinkedIn}, \href{[https://github.com/your-username]}{GitHub}}
+\extrainfo{\href{[https://linkedin.com/in/your-profile]}{LinkedIn}}
 
 \begin{document}
 
 \makecvtitle
 
 % ============================================================
-%     PROFILE STATEMENT
+%     PERFIL PROFESIONAL
 % ============================================================
 
-\vspace{6pt}
-\small{[Write a 3-5 line profile statement tailored to the role you're applying for. Focus on what makes you uniquely qualified. Example: "Data scientist with a PhD in [field] and X years of industry experience. Combines deep domain expertise in [domain] with strong applied machine learning and Python development skills. Experienced in developing end-to-end ML pipelines, from data ingestion to stakeholder-facing dashboards."]}
-
-% ============================================================
-%     CORE COMPETENCIES
-% ============================================================
-
-\section{Core Competencies}
+\section{Perfil profesional}
 \vspace{1pt}
-\begin{itemize}
-
-\item \textbf{[Skill Category 1]}: [Specific skills, frameworks, tools. Be concrete.]
-
-\item \textbf{[Skill Category 2]}: [Specific skills, frameworks, tools.]
-
-\item \textbf{[Skill Category 3]}: [Specific skills, frameworks, tools.]
-
-\item \textbf{[Skill Category 4]}: [Domain expertise, methods, approaches.]
-
-\item \textbf{[Skill Category 5]}: [Tools, platforms, software.]
-
-\end{itemize}
+\small{Ingeniera en Administración de Empresas con 6 años de experiencia en abastecimiento, control de inventario y logística de distribución para retail y comercio mayorista. Orientada a datos: automatizo reportes en Excel y Power BI y uso SAP MM a diario. Experiencia coordinando proveedores, transportistas y equipos de bodega para cumplir niveles de servicio con presupuestos acotados.}
 
 % ============================================================
-%     PROFESSIONAL EXPERIENCE
+%     EXPERIENCIA LABORAL
 % ============================================================
 
-\section{Professional Experience}
+\section{Experiencia laboral}
 \vspace{3pt}
 \begin{itemize}
 
-% --- Most Recent Role ---
-\item{\cventry{[YYYY-Present]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+% --- Cargo más reciente ---
+\item{\cventry{2022 - Actualidad}{Analista de Abastecimiento}{Comercial Andes SpA}{Santiago}{}{\vspace{1pt}
 \begin{itemize}
-    \item {[Achievement or responsibility 1 - be specific, use numbers where possible]}
-    \item {[Achievement or responsibility 2]}
-    \item {[Achievement or responsibility 3]}
-    \item {[Achievement or responsibility 4]}
+    \item {Planifico la reposición de 1.200 SKU para 14 tiendas; el quiebre de stock bajó de 9\% a 4\% en 18 meses.}
+    \item {Diseñé un tablero de inventario en Power BI que reemplazó 6 planillas manuales (10 horas semanales de ahorro).}
+    \item {Negocio condiciones con 35 proveedores nacionales: ahorro anual de \$45 millones en compras recurrentes.}
+    \item {Lidero el inventario cíclico mensual con las jefaturas de bodega, con una exactitud de inventario sobre el 98\%.}
 \end{itemize}}}
 
 \vspace{3pt}
 
-% --- Previous Role ---
-\item{\cventry{[YYYY-YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+% --- Cargo anterior ---
+\item{\cventry{2019 - 2022}{Asistente de Logística}{Distribuidora Pacífico Ltda.}{Maipú}{}{\vspace{1pt}
 \begin{itemize}
-    \item {[Achievement or responsibility 1]}
-    \item {[Achievement or responsibility 2]}
-    \item {[Achievement or responsibility 3]}
+    \item {Coordiné la programación diaria de despachos a regiones con 4 empresas de transporte externas.}
+    \item {Implementé un control de guías de despacho en SAP que redujo en 30\% los reclamos por entregas incompletas.}
+    \item {Apoyé la migración del maestro de materiales a SAP MM, depurando más de 3.000 registros duplicados.}
 \end{itemize}}}
 
 \vspace{3pt}
 
-% --- Earlier Role ---
-\item{\cventry{[YYYY-YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+% --- Primer cargo ---
+\item{\cventry{2018 - 2019}{Práctica profesional en Operaciones}{Retail Austral S.A.}{Santiago}{}{\vspace{1pt}
 \begin{itemize}
-    \item {[Achievement or responsibility 1]}
-    \item {[Achievement or responsibility 2]}
+    \item {Documenté el proceso de recepción de mercadería y propuse mejoras de layout para la bodega central.}
 \end{itemize}}}
 
 \end{itemize}
 
 % ============================================================
-%     EDUCATION
+%     FORMACIÓN ACADÉMICA
 % ============================================================
 
-\section{Education}
+\section{Formación académica}
 \vspace{1pt}
 \begin{itemize}
-
-\item{\cventry{[YYYY-YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-Thesis: ``[Thesis Title].'' [Brief description of research focus.]
-}}
-
-\vspace{3pt}
-
-\item{\cventry{[YYYY-YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-[Brief description or key topics.]
-}}
-
+\item{\cventry{2014 - 2018}{Ingeniería en Administración de Empresas}{Universidad Ejemplo de Santiago}{Santiago}{}{}}
 \end{itemize}
 
 % ============================================================
-%     LANGUAGES
+%     CURSOS Y CERTIFICACIONES
 % ============================================================
 
-\section{Languages}
+\section{Cursos y certificaciones}
 \vspace{1pt}
 \begin{itemize}
-\item {[Language 1] (native), [Language 2] (fluent), [Language 3] (intermediate).}
+\item {Diplomado en Gestión de Operaciones y Logística, Universidad Ejemplo de Santiago (120 horas, 2023).}
+\item {Power BI para análisis de datos, OTEC Capacita Ejemplo, curso SENCE (40 horas, 2022).}
+\item {Excel avanzado, OTEC Capacita Ejemplo (24 horas, 2020).}
 \end{itemize}
 
 % ============================================================
-%     PUBLICATIONS (optional)
+%     HABILIDADES
 % ============================================================
 
-\section{Publications}
+\section{Habilidades}
 \vspace{1pt}
 \begin{itemize}
-\item {[Author(s)] ([Year]). [Title]. [Journal/Conference]. \href{[DOI_URL]}{DOI link}}
+\item \textbf{Herramientas}: SAP MM, Excel avanzado (tablas dinámicas, macros), Power BI, Google Workspace.
+\item \textbf{Gestión}: planificación de demanda, control de inventario, negociación con proveedores, KPI de servicio.
 \end{itemize}
 
 % ============================================================
-%     HONORS AND AWARDS (optional)
+%     IDIOMAS
 % ============================================================
 
-\section{Honors and Awards}
+\section{Idiomas}
 \vspace{1pt}
 \begin{itemize}
-\item{\textbf{[Award Name]} -- [Event/Organization] ([Year]).}
+\item {Español nativo; inglés intermedio (lectura técnica y correo).}
 \end{itemize}
 
 % ============================================================
-%     REFERENCES
+%     OTROS DATOS
 % ============================================================
 
-\section{References}
+\section{Otros datos}
 \vspace{1pt}
 \begin{itemize}
-\item{Available upon request.}
+\item {Licencia de conducir clase B. Disponibilidad inmediata. Referencias disponibles a solicitud.}
 \end{itemize}
 
 \end{document}

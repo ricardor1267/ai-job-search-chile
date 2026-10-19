@@ -1,60 +1,70 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Cover Letter - [Company], [Role]
+% Carta de presentación - Comercial Andes SpA, Analista de Abastecimiento
 %
-% Example cover letter with placeholder content. This is the structural
-% reference for /apply (see 06-cover-letter-templates.md) and the CI smoke
-% test for cover.cls: it must always compile with xelatex to exactly 1 page.
-% It demonstrates the correct itemize pattern: the list sits OUTSIDE
-% \lettercontent{} (whose trailing \\ errors on \end{itemize}) and is
-% wrapped in Raleway-Medium so the bullet font matches the body.
+% Carta de ejemplo: el encabezado y la firma usan marcadores que /setup y /apply
+% completan; la empresa, el cargo y los logros del cuerpo son FICTICIOS.
+%
+% Es la referencia estructural para /apply (ver 06-cover-letter-templates.md)
+% y la prueba de humo de CI para cover.cls: siempre debe compilar con xelatex
+% en exactamente 1 página. Muestra el patrón correcto de itemize: la lista va
+% FUERA de \lettercontent{} (cuyo \\ final falla con \end{itemize}) y se
+% envuelve en Raleway-Medium para que la viñeta use la fuente del cuerpo.
+%
+% Convenciones chilenas: registro formal neutro, saludo "Estimado/a ...:",
+% fecha "Santiago, 19 de octubre de 2026" (polyglossia pone \today en
+% español) y cierre "Saludos cordiales,".
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[]{cover}
+% Idioma español: fechas (\today), separación silábica y textos generados.
+% cover.cls ya carga fontspec, así que con xelatex corresponde polyglossia.
+\usepackage{polyglossia}
+\setdefaultlanguage{spanish}
 \usepackage{fancyhdr}
 
 \pagestyle{fancy}
 \fancyhf{}
 
-\rfoot{Page \thepage \hspace{0pt}}
+\rfoot{Página \thepage \hspace{0pt}}
 \thispagestyle{empty}
 \renewcommand{\headrulewidth}{0pt}
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     TITLE NAME
+%     NOMBRE Y CONTACTO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\namesection{}{\Huge{[YOUR NAME]}}{  \href{mailto:your.email@example.com}{your.email@example.com} | [+XX XXXXXXXXXX] |  \urlstyle{same}\href{https://www.linkedin.com/in/yourprofile}{LinkedIn}
+\namesection{}{\Huge{[YOUR NAME]}}{  \href{mailto:your.email@example.com}{your.email@example.com} | [+56 9 XXXX XXXX] | [Comuna, Región] | \urlstyle{same}\href{https://www.linkedin.com/in/yourprofile}{LinkedIn}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     MAIN COVER LETTER CONTENT
+%     CONTENIDO DE LA CARTA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\currentdate{\today}
-\lettercontent{Dear [Hiring Manager / Team],}
+\currentdate{Santiago, \today}
+\lettercontent{Estimado/a equipo de selección:}
 
-\lettercontent{[Opening paragraph: name the role and where you found it, state your strongest connection to it in one sentence, and preview why you are a fit. Keep it to 2--3 sentences.]}
+\lettercontent{Les escribo para postular al cargo de Analista de Abastecimiento publicado por Comercial Andes SpA. Llevo seis años trabajando en abastecimiento y logística para retail y comercio mayorista, y la reposición de tiendas que describe el aviso es justamente el trabajo que hago hoy.}
 
-\lettercontent{[Body paragraph: your most relevant experience, framed toward the tasks in the posting. Follow with 3--5 concrete bullets:]}
+\lettercontent{En mi cargo actual planifico la reposición de más de mil SKU para una red de tiendas, con foco en reducir quiebres de stock sin aumentar el capital inmovilizado. Algunos resultados concretos:}
 
 {\raggedright\fontspec[Path = OpenFonts/fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{13pt}\selectfont
 \begin{itemize}
-    \item \textbf{[Achievement 1]:} [concrete result with a number where possible]
-    \item \textbf{[Achievement 2]:} [skill or project mapped to a posting requirement]
-    \item \textbf{[Achievement 3]:} [evidence for a nice-to-have requirement]
+    \item \textbf{Quiebre de stock:} lo reduje de 9\% a 4\% en 18 meses ajustando parámetros de reposición en SAP MM.
+    \item \textbf{Reportabilidad:} un tablero en Power BI reemplazó 6 planillas manuales y libera 10 horas semanales del equipo.
+    \item \textbf{Proveedores:} negocié condiciones con 35 proveedores nacionales, con un ahorro anual de \$45 millones.
 \end{itemize}\par}
 \vspace{6pt}
 
-\lettercontent{[Connection paragraph: why this company specifically. Reference a verified specific: a product, a stated priority, a team. Never generic.]}
+\lettercontent{Me interesa especialmente Comercial Andes por su plan de abrir nuevas tiendas en regiones: coordinar despachos a regiones con transportistas externos fue parte central de mi trabajo anterior, y sé cuánto depende la experiencia del cliente de que la reposición llegue a tiempo.}
 
-\lettercontent{[Personal fit paragraph: behavioral strengths and what you bring to the team, 2--3 sentences.]}
+\lettercontent{Trabajo bien con equipos de bodega y de compras, me gusta ordenar procesos con datos y comunico los problemas temprano. Tengo licencia de conducir clase B y disponibilidad inmediata.}
 
-\lettercontent{I look forward to hearing from you.}
+\lettercontent{Quedo atenta a la posibilidad de conversar sobre cómo puedo aportar a su equipo.}
 
 \begin{flushright}
-% Note: no trailing \\ inside \closing{} - cover.cls appends its own \\, and a
-% doubled break triggers "There's no line here to end."
-\closing{Kind regards,}
+% Nota: sin \\ final dentro de \closing{} - cover.cls agrega su propio \\, y
+% un salto doble provoca "There's no line here to end."
+\closing{Saludos cordiales,}
 
 \signature{[YOUR NAME]}
 \end{flushright}
