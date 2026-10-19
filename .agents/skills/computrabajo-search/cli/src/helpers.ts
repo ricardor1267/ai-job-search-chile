@@ -72,7 +72,9 @@ export function parseSearch(html: string, now: Date = new Date()): ComputrabajoR
   const chunks = html.split(/<article class="box_offer/).slice(1)
   for (const raw of chunks) {
     const chunk = raw.split(/<\/article>/)[0]
-    const id = chunk.match(/data-id="([0-9A-F]{16,})"/i)?.[1]
+    // The raw server HTML quotes data-id with single quotes (data-id='475B...'); browsers
+    // normalize that to double quotes in the DOM, so accept both.
+    const id = chunk.match(/data-id=["']([0-9A-F]{16,})["']/i)?.[1]
     const link = chunk.match(/<a class="js-o-link[^"]*" href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i)
     if (!id || !link) continue
     const title = cleanInline(link[2])

@@ -96,7 +96,7 @@ export function parseSearch(html: string, now: Date = new Date()): Chiletrabajos
     if (!link) continue
     const url = link[1].split("?")[0]
     const title = cleanInline(link[2])
-    const idMatch = chunk.match(/data-id="(\d+)"/) ?? url.match(/-(\d+)$/)
+    const idMatch = chunk.match(/data-id=["'](\d+)["']/) ?? url.match(/-(\d+)$/)
     if (!title || !idMatch) continue
 
     const metas = [...chunk.matchAll(/<h3 class="meta">([\s\S]*?)<\/h3>/gi)].map((m) => m[1])
